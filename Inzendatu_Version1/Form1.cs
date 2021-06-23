@@ -18,6 +18,8 @@ namespace Inzendatu_Version1
         private string Pathnow = "";
         private Bunifu.UI.WinForms.BunifuPanel panelPrev = new Bunifu.UI.WinForms.BunifuPanel();
         private Bunifu.UI.WinForms.BunifuDataGridView gridPrev = new Bunifu.UI.WinForms.BunifuDataGridView();
+        private Boolean ouvertoupas = false;
+        private bool radioisChecked = false;
 
         public Form1()
         {
@@ -38,7 +40,7 @@ namespace Inzendatu_Version1
             bunifuLabel12.Text = "";
             bunifuLabel13.Text = "";
             bunifuLabel14.Text = "";
-
+            bunifuVScrollBar1.BindTo(bunifuDataGridView1);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -61,6 +63,7 @@ namespace Inzendatu_Version1
                         listFilesSelected.Add(fi.FullName);
                         listView1.Items.Add(fi.Name, imageList1.Images.Count - 1);
                     }
+                    ouvertoupas = true;
                 }
             }
         }
@@ -99,7 +102,7 @@ namespace Inzendatu_Version1
         {
             if (checkPrev == false)
             {
-                panelPrev.Size = new Size(1500, 250);
+                panelPrev.Size = new Size(1400, 250);
                 panelPrev.Dock = DockStyle.Bottom;
                 panelPrev.BackgroundColor = Color.Red;
                 panelPrev.Controls.Add(gridPrev);
@@ -108,14 +111,14 @@ namespace Inzendatu_Version1
                 elipse.TargetControl = panelPrev;
                 gridPrev.Dock = DockStyle.Fill;           
 
-                this.Size = new Size(1500, 1050);
+                this.Size = new Size(1400, 1050);
                 this.Controls.Add(panelPrev);
 
                 checkPrev = true;
             }
             else
             {
-                this.Size = new Size(1500, 800);
+                this.Size = new Size(1400, 800);
                 this.Controls.Remove(panelPrev);
 
                 checkPrev = false;
@@ -124,7 +127,7 @@ namespace Inzendatu_Version1
 
         private void bunifuDataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (bunifuDataGridView1.SelectedRows.Count == 1)
+            if (bunifuDataGridView1.SelectedRows.Count == 1 && ouvertoupas == true)
             {
                 try
                 {
@@ -173,6 +176,30 @@ namespace Inzendatu_Version1
             return Pathnow + @"\" + bunifuDataGridView1.Rows[selectedRow_inDataGridViewCentrale].Cells[1].FormattedValue.ToString();
         }
 
+        private void bunifuButton1_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void bunifuButton2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuRadioButton1_Click(object sender, EventArgs e)
+        {
+            if (bunifuRadioButton1.Checked && !radioisChecked)
+            {
+                bunifuRadioButton1.Checked = false;
+                radioisChecked = true;
+                listView1.View = View.LargeIcon;
+            }
+            else
+            {
+                bunifuRadioButton1.Checked = true;
+                radioisChecked = false;
+                listView1.View = View.List;
+            }
+        }
     }
 }
