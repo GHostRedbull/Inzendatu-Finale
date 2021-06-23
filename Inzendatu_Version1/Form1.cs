@@ -24,6 +24,7 @@ namespace Inzendatu_Version1
         public Form1()
         {
             InitializeComponent();
+
             listView1.MultiSelect = true;
 
             bunifuDataGridView1.Columns.Add("Id", "Numero");
@@ -40,7 +41,11 @@ namespace Inzendatu_Version1
             bunifuLabel12.Text = "";
             bunifuLabel13.Text = "";
             bunifuLabel14.Text = "";
+
+            listView1.View = View.List;
+
             bunifuVScrollBar1.BindTo(bunifuDataGridView1);
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -68,62 +73,12 @@ namespace Inzendatu_Version1
             }
         }
 
-        private void bunifuTileButton1_Click(object sender, EventArgs e)
-        {
-            listView1.View = View.List;
-        }
-
-        private void bunifuTileButton2_Click(object sender, EventArgs e)
-        {
-            listView1.View = View.LargeIcon;
-        }
-
-        private void bunifuTileButton4_Click(object sender, EventArgs e)
-        {
-            List<string> listtt = new List<string>();
-            int i = 0;
-
-            foreach (var tt in listView1.SelectedItems)
-            {
-                listtt.Add(tt.ToString().Split('{')[1].Split('}')[0]);
-
-                bunifuDataGridView1.Rows.Add(++i, tt.ToString().Split('{')[1].Split('}')[0]);
-            }
-
-        }
-
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             //if (listView1.FocusedItem != null)
                 //Console.WriteLine(listFilesSelected[listView1.FocusedItem.Index]);
         }
 
-        private void bunifuTileButton5_Click(object sender, EventArgs e)
-        {
-            if (checkPrev == false)
-            {
-                panelPrev.Size = new Size(1400, 250);
-                panelPrev.Dock = DockStyle.Bottom;
-                panelPrev.BackgroundColor = Color.Red;
-                panelPrev.Controls.Add(gridPrev);
-
-                Bunifu.Framework.UI.BunifuElipse elipse = new Bunifu.Framework.UI.BunifuElipse();
-                elipse.TargetControl = panelPrev;
-                gridPrev.Dock = DockStyle.Fill;           
-
-                this.Size = new Size(1400, 1050);
-                this.Controls.Add(panelPrev);
-
-                checkPrev = true;
-            }
-            else
-            {
-                this.Size = new Size(1400, 800);
-                this.Controls.Remove(panelPrev);
-
-                checkPrev = false;
-            }
-        }
 
         private void bunifuDataGridView1_SelectionChanged(object sender, EventArgs e)
         {
@@ -178,12 +133,42 @@ namespace Inzendatu_Version1
 
         private void bunifuButton1_Click(object sender, EventArgs e)
         {
+            List<string> listtt = new List<string>();
+            int i = 0;
 
+            foreach (var tt in listView1.SelectedItems)
+            {
+                listtt.Add(tt.ToString().Split('{')[1].Split('}')[0]);
+
+                bunifuDataGridView1.Rows.Add(++i, tt.ToString().Split('{')[1].Split('}')[0]);
+            }
         }
 
         private void bunifuButton2_Click(object sender, EventArgs e)
         {
+            if (checkPrev == false)
+            {
+                panelPrev.Size = new Size(1400, 250);
+                panelPrev.Dock = DockStyle.Bottom;
+                panelPrev.BackgroundColor = Color.Red;
+                panelPrev.Controls.Add(gridPrev);
 
+                Bunifu.Framework.UI.BunifuElipse elipse = new Bunifu.Framework.UI.BunifuElipse();
+                elipse.TargetControl = panelPrev;
+                gridPrev.Dock = DockStyle.Fill;
+
+                this.Size = new Size(1400, 1050);
+                this.Controls.Add(panelPrev);
+
+                checkPrev = true;
+            }
+            else
+            {
+                this.Size = new Size(1400, 800);
+                this.Controls.Remove(panelPrev);
+
+                checkPrev = false;
+            }
         }
 
         private void bunifuRadioButton1_Click(object sender, EventArgs e)
