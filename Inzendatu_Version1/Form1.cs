@@ -29,23 +29,30 @@ namespace Inzendatu_Version1
 
             bunifuDataGridView1.Columns.Add("Id", "Numero");
             bunifuDataGridView1.Columns.Add("Nom", "Nom du ficher");
+            bunifuDataGridView1.Columns[0].Width = 100;
 
             gridPrev.Columns.Add("Path", "Emplacement");
             gridPrev.Columns.Add("NO", "Nom Original");
             gridPrev.Columns.Add("NN", "Nouveau Nom");
 
-            bunifuLabel8.Text = "";
-            bunifuLabel9.Text = "";
-            bunifuLabel10.Text = "";
-            bunifuLabel11.Text = "";
-            bunifuLabel12.Text = "";
-            bunifuLabel13.Text = "";
-            bunifuLabel14.Text = "";
+            bunifuLabel1.Text = "";// Nom (Titre)
+            bunifuLabel2.Text = ""; // Emplacement (Titre)
+            bunifuLabel3.Text = ""; // Type (Titre)
+            bunifuLabel4.Text = ""; // Taille (Titre)
+            bunifuLabel5.Text = ""; // Dimensions (Titre)
+            bunifuLabel6.Text = ""; // D.Creation (Titre)
+            bunifuLabel7.Text = ""; // D.Modifi (Titre)
+            bunifuLabel8.Text = "";// Nom
+            bunifuLabel9.Text = ""; // Emplacement
+            bunifuLabel10.Text = ""; // Type
+            bunifuLabel11.Text = ""; // Taille
+            bunifuLabel12.Text = ""; // Dimensions
+            bunifuLabel13.Text = ""; // D.Creation
+            bunifuLabel14.Text = ""; // D.Modifi
 
             listView1.View = View.List;
 
             bunifuVScrollBar1.BindTo(bunifuDataGridView1);
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -82,12 +89,20 @@ namespace Inzendatu_Version1
 
         private void bunifuDataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (bunifuDataGridView1.SelectedRows.Count == 1 && ouvertoupas == true)
+            if (bunifuDataGridView1.SelectedRows.Count == 1 && ouvertoupas == true && bunifuDataGridView1.RowCount > 1)
             {
                 try
                 {
                     string activePath = getEmplacement(bunifuDataGridView1.SelectedRows[0].Index);
                     FileInfo fileInfo = new FileInfo(activePath);
+
+                    bunifuLabel1.Text = "Nom";// Nom (Titre)
+                    bunifuLabel2.Text = "Emplacement"; // Emplacement (Titre)
+                    bunifuLabel3.Text = "Type"; // Type (Titre)
+                    bunifuLabel4.Text = "Taille"; // Taille (Titre)
+                    bunifuLabel5.Text = "Dimensions"; // Dimensions (Titre)
+                    bunifuLabel6.Text = "Creation"; // D.Creation (Titre)
+                    bunifuLabel7.Text = "Modifications"; // D.Modifi (Titre)
                     bunifuLabel8.Text = fileInfo.Name; // Nom
                     bunifuLabel9.Text = fileInfo.Directory.ToString(); // Emplacement
                     bunifuLabel10.Text = fileInfo.Extension; // Type
@@ -96,14 +111,17 @@ namespace Inzendatu_Version1
                     bunifuLabel13.Text = fileInfo.CreationTime.ToString(); // D.Creation
                     bunifuLabel14.Text = fileInfo.LastWriteTime.ToString(); // D.Modifi
 
+                    pictureBox3.Image = Icon.ExtractAssociatedIcon(activePath).ToBitmap();
                 }
                 catch (Exception ee)
                 {
-                    Console.WriteLine(ee.ToString());
+                    //Console.WriteLine(ee.ToString());
                     pictureBox1.Image = null;
                     pictureBox1.Refresh();
                 }
             }
+
+            bunifuVScrollBar1.Maximum = bunifuDataGridView1.RowCount + 5;
         }
 
         private string getDimensions(string path)
@@ -120,7 +138,7 @@ namespace Inzendatu_Version1
             {
                 pictureBox1.Image = null;
                 pictureBox1.Refresh();
-                Console.WriteLine(e.ToString());
+                //Console.WriteLine(e.ToString());
             }
 
             return ret;
@@ -142,10 +160,14 @@ namespace Inzendatu_Version1
 
                 bunifuDataGridView1.Rows.Add(++i, tt.ToString().Split('{')[1].Split('}')[0]);
             }
+
+            bunifuVScrollBar1.Maximum = bunifuDataGridView1.RowCount + 5;
         }
 
         private void bunifuButton2_Click(object sender, EventArgs e)
         {
+            Bunifu.UI.WinForms.BunifuTransition transition = new Bunifu.UI.WinForms.BunifuTransition();
+
             if (checkPrev == false)
             {
                 panelPrev.Size = new Size(1400, 250);
@@ -155,10 +177,35 @@ namespace Inzendatu_Version1
 
                 Bunifu.Framework.UI.BunifuElipse elipse = new Bunifu.Framework.UI.BunifuElipse();
                 elipse.TargetControl = panelPrev;
-                gridPrev.Dock = DockStyle.Fill;
 
-                this.Size = new Size(1400, 1050);
+                gridPrev.AllowCustomTheming = true;
+                gridPrev.Dock = DockStyle.Fill;
+                gridPrev.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                gridPrev.AllowUserToResizeRows = false;
+                gridPrev.AllowUserToOrderColumns = false;
+                gridPrev.ReadOnly = true;
+                gridPrev.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                gridPrev.ScrollBars = ScrollBars.None;
+                gridPrev.CurrentTheme.BackColor = Color.White;
+                gridPrev.CurrentTheme.GridColor = Color.White;
+                gridPrev.CurrentTheme.AlternatingRowsStyle.BackColor = Color.White;
+                gridPrev.CurrentTheme.AlternatingRowsStyle.ForeColor = Color.FromArgb(57, 47, 90);
+                gridPrev.CurrentTheme.AlternatingRowsStyle.SelectionBackColor = Color.LightGray;
+                gridPrev.CurrentTheme.AlternatingRowsStyle.SelectionForeColor = Color.White;
+                gridPrev.CurrentTheme.HeaderStyle.BackColor = Color.FromArgb(57, 47, 90);
+                gridPrev.CurrentTheme.HeaderStyle.ForeColor = Color.White;
+                gridPrev.CurrentTheme.HeaderStyle.SelectionBackColor = Color.White;
+                gridPrev.CurrentTheme.HeaderStyle.SelectionForeColor = Color.White;
+                gridPrev.CurrentTheme.RowsStyle.BackColor = Color.White;
+                gridPrev.CurrentTheme.RowsStyle.ForeColor = Color.FromArgb(57, 47, 90);
+                gridPrev.CurrentTheme.RowsStyle.SelectionBackColor = Color.LightGray;
+                gridPrev.CurrentTheme.RowsStyle.SelectionForeColor = Color.FromArgb(57, 47, 90);
+                gridPrev.HeaderBackColor = Color.FromArgb(57, 47, 90);
+                gridPrev.HeaderForeColor = Color.White;
+
                 this.Controls.Add(panelPrev);
+                this.Size = new Size(1400, 1050);
+                //transition.ShowSync(this, false, Bunifu.UI.WinForms.BunifuAnimatorNS.Animation.Transparent);
 
                 checkPrev = true;
             }
@@ -185,6 +232,29 @@ namespace Inzendatu_Version1
                 radioisChecked = false;
                 listView1.View = View.List;
             }
+        }
+
+        private void bunifuDataGridView1_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            if (bunifuDataGridView1.Rows.Count == 1)
+            {
+                bunifuLabel1.Text = "";// Nom (Titre)
+                bunifuLabel2.Text = ""; // Emplacement (Titre)
+                bunifuLabel3.Text = ""; // Type (Titre)
+                bunifuLabel4.Text = ""; // Taille (Titre)
+                bunifuLabel5.Text = ""; // Dimensions (Titre)
+                bunifuLabel6.Text = ""; // D.Creation (Titre)
+                bunifuLabel7.Text = ""; // D.Modifi (Titre)
+                bunifuLabel8.Text = "";// Nom
+                bunifuLabel9.Text = ""; // Emplacement
+                bunifuLabel10.Text = ""; // Type
+                bunifuLabel11.Text = ""; // Taille
+                bunifuLabel12.Text = ""; // Dimensions
+                bunifuLabel13.Text = ""; // D.Creation
+                bunifuLabel14.Text = ""; // D.Modifi
+                pictureBox3.Image = null;
+            }
+            bunifuVScrollBar1.Maximum = bunifuDataGridView1.RowCount + 5;
         }
     }
 }
