@@ -86,7 +86,6 @@ namespace Inzendatu_Version1
                 //Console.WriteLine(listFilesSelected[listView1.FocusedItem.Index]);
         }
 
-
         private void bunifuDataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (bunifuDataGridView1.SelectedRows.Count == 1 && ouvertoupas == true && bunifuDataGridView1.RowCount > 1)
@@ -106,7 +105,18 @@ namespace Inzendatu_Version1
                     bunifuLabel8.Text = fileInfo.Name; // Nom
                     bunifuLabel9.Text = fileInfo.Directory.ToString(); // Emplacement
                     bunifuLabel10.Text = fileInfo.Extension; // Type
-                    bunifuLabel11.Text = fileInfo.Length.ToString(); // Taille
+                    bunifuLabel11.Text = fileInfo.Length.ToString(); // Taille du fichier
+                    if (fileInfo.Length >= (1 << 30))
+                        bunifuLabel11.Text = string.Format("{0} Go", fileInfo.Length >> 30);
+                    else
+                    if (fileInfo.Length >= (1 << 20))
+                        bunifuLabel11.Text = string.Format("{0} Mo", fileInfo.Length >> 20);
+                    else
+                    if (fileInfo.Length >= (1 << 10))
+                        bunifuLabel11.Text = string.Format("{0} Ko", fileInfo.Length >> 10);
+                    else
+                        bunifuLabel11.Text = string.Format("{0} Octets", fileInfo.Length >> 10);
+
                     bunifuLabel12.Text = getDimensions(activePath); // Dimensions
                     bunifuLabel13.Text = fileInfo.CreationTime.ToString(); // D.Creation
                     bunifuLabel14.Text = fileInfo.LastWriteTime.ToString(); // D.Modifi
