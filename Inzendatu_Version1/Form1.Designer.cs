@@ -46,8 +46,6 @@
             this.bunifuFormDock1 = new Bunifu.UI.WinForms.BunifuFormDock();
             this.bunifuPanel2 = new Bunifu.UI.WinForms.BunifuPanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
-            this.bunifuElipse2 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.bunifuDataGridView1 = new Bunifu.UI.WinForms.BunifuDataGridView();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.bunifuLabel14 = new Bunifu.UI.WinForms.BunifuLabel();
@@ -311,22 +309,12 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(57, 21);
+            this.pictureBox2.Location = new System.Drawing.Point(57, 25);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(117, 28);
+            this.pictureBox2.Size = new System.Drawing.Size(106, 23);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
-            // 
-            // bunifuElipse1
-            // 
-            this.bunifuElipse1.ElipseRadius = 10;
-            this.bunifuElipse1.TargetControl = this;
-            // 
-            // bunifuElipse2
-            // 
-            this.bunifuElipse2.ElipseRadius = 9;
-            this.bunifuElipse2.TargetControl = this;
             // 
             // bunifuDataGridView1
             // 
@@ -574,7 +562,7 @@
             this.bunifuLabel4.Location = new System.Drawing.Point(15, 160);
             this.bunifuLabel4.Name = "bunifuLabel4";
             this.bunifuLabel4.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel4.Size = new System.Drawing.Size(27, 15);
+            this.bunifuLabel4.Size = new System.Drawing.Size(28, 15);
             this.bunifuLabel4.TabIndex = 3;
             this.bunifuLabel4.Text = "Taille";
             this.bunifuLabel4.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -589,7 +577,7 @@
             this.bunifuLabel3.Location = new System.Drawing.Point(15, 139);
             this.bunifuLabel3.Name = "bunifuLabel3";
             this.bunifuLabel3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel3.Size = new System.Drawing.Size(25, 15);
+            this.bunifuLabel3.Size = new System.Drawing.Size(26, 15);
             this.bunifuLabel3.TabIndex = 2;
             this.bunifuLabel3.Text = "Type";
             this.bunifuLabel3.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
@@ -945,7 +933,7 @@
             this.bunifuTileButton4.Location = new System.Drawing.Point(214, 13);
             this.bunifuTileButton4.Margin = new System.Windows.Forms.Padding(6);
             this.bunifuTileButton4.Name = "bunifuTileButton4";
-            this.bunifuTileButton4.Size = new System.Drawing.Size(35, 35);
+            this.bunifuTileButton4.Size = new System.Drawing.Size(30, 30);
             this.bunifuTileButton4.TabIndex = 11;
             // 
             // bunifuTileButton2
@@ -964,7 +952,7 @@
             this.bunifuTileButton2.Location = new System.Drawing.Point(178, 13);
             this.bunifuTileButton2.Margin = new System.Windows.Forms.Padding(6);
             this.bunifuTileButton2.Name = "bunifuTileButton2";
-            this.bunifuTileButton2.Size = new System.Drawing.Size(35, 35);
+            this.bunifuTileButton2.Size = new System.Drawing.Size(30, 30);
             this.bunifuTileButton2.TabIndex = 10;
             // 
             // bunifuTileButton1
@@ -983,7 +971,7 @@
             this.bunifuTileButton1.Location = new System.Drawing.Point(142, 13);
             this.bunifuTileButton1.Margin = new System.Windows.Forms.Padding(6);
             this.bunifuTileButton1.Name = "bunifuTileButton1";
-            this.bunifuTileButton1.Size = new System.Drawing.Size(35, 35);
+            this.bunifuTileButton1.Size = new System.Drawing.Size(30, 30);
             this.bunifuTileButton1.TabIndex = 8;
             // 
             // bunifuButton4
@@ -1109,7 +1097,6 @@
         private Bunifu.Framework.UI.BunifuTileButton bunifuTileButton3;
         private Bunifu.Framework.UI.BunifuCards bunifuCards1;
         private Bunifu.UI.WinForms.BunifuFormDock bunifuFormDock1;
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse2;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ImageList imageList1;
         private Bunifu.UI.WinForms.BunifuLabel bunifuLabel14;
@@ -1131,7 +1118,6 @@
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse4;
         private Bunifu.UI.WinForms.BunifuDataGridView bunifuDataGridView1;
         private Bunifu.UI.WinForms.BunifuPanel bunifuPanel2;
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private Bunifu.Framework.UI.BunifuCards bunifuCards2;
         private Bunifu.Framework.UI.BunifuCards bunifuCards3;
