@@ -176,13 +176,13 @@ namespace Inzendatu_Version1
             
             if (checkPrev == false)
             {
-                panelPrev.Size = new Size(1400, 250);
+                panelPrev.Size = new Size(1320, 250);
                 panelPrev.Dock = DockStyle.Bottom;
                 panelPrev.Padding = new Padding(12, 0, 12, 12);
                 panelPrev.Controls.Add(gridPrev);
 
                 Bunifu.Framework.UI.BunifuElipse elipse = new Bunifu.Framework.UI.BunifuElipse();
-                elipse.TargetControl = panelPrev;
+                elipse.TargetControl = gridPrev;
 
                 gridPrev.AllowCustomTheming = true;
                 gridPrev.Dock = DockStyle.Fill;
@@ -212,14 +212,14 @@ namespace Inzendatu_Version1
                 gridPrev.HeaderBackColor = Color.FromArgb(57, 47, 90);
                 gridPrev.HeaderForeColor = Color.White;
 
-                this.Size = new Size(1400, 1050);
+                this.Size = new Size(1320, 1050);
                 Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 9, 9)); //Creer manuellement les corner arrondis
                 this.Controls.Add(panelPrev);
                 checkPrev = true;
             }
             else
             {
-                this.Size = new Size(1400, 800);
+                this.Size = new Size(1320, 800);
                 this.Controls.Remove(panelPrev);
                 Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 9, 9)); //Creer manuellement les corner arrondis
                 checkPrev = false;
@@ -298,6 +298,34 @@ namespace Inzendatu_Version1
             bunifuLabel13.Text = fi.CreationTime.ToString(); // D.Creation
             bunifuLabel14.Text = fi.LastWriteTime.ToString(); // D.Modifi
             pictureBox3.Image = Icon.ExtractAssociatedIcon(path_).ToBitmap();
+        }
+
+        private void bunifuButton5_Click(object sender, EventArgs e)
+        {
+            bunifuPages1.SetPage(0);
+        }
+
+        private void bunifuButton6_Click(object sender, EventArgs e)
+        {
+            bunifuPages1.SetPage(1);
+        }
+
+        private void bunifuPages1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            setCurrentTab(bunifuPages1.SelectedIndex);
+        }
+
+        private void setCurrentTab(int index)
+        {
+            switch (bunifuPages1.SelectedIndex)
+            {
+                case 0:
+                    pictureBox4.Left = bunifuButton5.Right - bunifuButton5.Width;
+                    break;
+                case 1:
+                    pictureBox4.Left = bunifuButton6.Right - bunifuButton6.Width;
+                    break;
+            }
         }
     }
 }
