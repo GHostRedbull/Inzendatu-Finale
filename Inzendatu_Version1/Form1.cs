@@ -36,6 +36,8 @@ namespace Inzendatu_Version1
         private bool radioisChecked = false;
         private bool check_State = false;
 
+        private List<Interface1> listPropriete = new List<Interface1>();
+
         public Form1()
         {
             InitializeComponent();
@@ -55,7 +57,9 @@ namespace Inzendatu_Version1
             initLabelVide();
 
             listView1.MultiSelect = true;
-            listView1.View = View.List;    
+            listView1.View = View.List;
+            listView2.MultiSelect = false;
+
             bunifuVScrollBar1.BindTo(bunifuDataGridView1);
         }
 
@@ -315,6 +319,11 @@ namespace Inzendatu_Version1
             setCurrentTab(bunifuPages1.SelectedIndex);
         }
 
+        private void bunifuButton7_Click(object sender, EventArgs e)
+        {
+            bunifuPages1.SetPage(2);
+        }
+
         private void setCurrentTab(int index)
         {
             switch (bunifuPages1.SelectedIndex)
@@ -325,7 +334,101 @@ namespace Inzendatu_Version1
                 case 1:
                     pictureBox4.Left = bunifuButton6.Right - bunifuButton6.Width;
                     break;
+                case 2:
+                    pictureBox4.Left = bunifuButton7.Right - bunifuButton7.Width;
+                    break;
             }
         }
+
+        ////// Tout les boutons "ajouter" à l'interieur des tabPages
+        private void bunifuButton8_Click(object sender, EventArgs e)
+        {
+            Inserer ins = new Inserer(bunifuTextBox1, bunifuTextBox2, bunifuTextBox3, bunifuTextBox4, bunifuTextBox5, bunifuRadioButton2, bunifuRadioButton3, bunifuRadioButton4, bunifuRadioButton5, bunifuRadioButton6, bunifuRadioButton7);
+            listPropriete.Add(ins);     
+            listView2.Items.Add((listPropriete.Count).ToString() + ". " + listPropriete.Last().Name);
+            listView2.Refresh();
+
+            ClearAll();
+        }
+
+        private void bunifuButton9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuButton10_Click(object sender, EventArgs e)
+        {
+            Capitalisation capi = new Capitalisation(bunifuTextBox6, bunifuRadioButton8, bunifuRadioButton9, bunifuRadioButton10, bunifuRadioButton11);
+            listPropriete.Add(capi);
+            listView2.Items.Add((listPropriete.Count).ToString() + ". " + listPropriete.Last().Name);
+            listView2.Refresh();
+        }
+        ////// Tout les boutons "ajouter" à l'interieur des tabPages
+
+        private void listView2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedItems = listView2.SelectedItems;
+            int p = 0;
+
+            if (selectedItems.Count > 0)
+            {
+                //// Ici si un item est selectionné dans la listView
+                p = listView2.SelectedIndices[0];
+
+                if (selectedItems[0].ToString().Contains("Insérer"))
+                {
+                    //// Ici si un l'item selectionné est de type Inserer
+                    bunifuPages1.SelectedIndex = 0;
+                    listPropriete[p].Send();
+
+                    Console.WriteLine("Ici Inser " + listPropriete[p].GetTextAjouter);
+                }
+                else if (selectedItems[0].ToString().Contains("Capitalisation"))
+                {
+                    //// Ici si un l'item selectionné est de type Capitalisation
+                    bunifuPages1.SelectedIndex = 2;
+                    listPropriete[p].Send();
+
+                    Console.WriteLine("Ici Capit");
+                }
+            }
+            else
+            {   //// Surtout ne pas enlever se If
+                if (listView2.FocusedItem == null) { }
+                else
+                {
+                    //// Ici si aucune propriete est choisie dans la listView
+                    ClearAll();
+
+                    Console.WriteLine("Rien");
+                }
+
+            }
+        }
+
+
+
+        /// </Clear tout les textbox et radiobuttons de tout les onglets>
+        private void ClearAll()
+        {
+            bunifuTextBox1.Text = "";
+            bunifuTextBox2.Text = "";
+            bunifuTextBox3.Text = "";
+            bunifuTextBox4.Text = "";
+            bunifuTextBox5.Text = "";
+            bunifuTextBox6.Text = "";
+            bunifuRadioButton2.Checked = false;
+            bunifuRadioButton3.Checked = false;
+            bunifuRadioButton4.Checked = false;
+            bunifuRadioButton5.Checked = false;
+            bunifuRadioButton6.Checked = false;
+            bunifuRadioButton7.Checked = false;
+            bunifuRadioButton8.Checked = false;
+            bunifuRadioButton9.Checked = false;
+            bunifuRadioButton10.Checked = false;
+            bunifuRadioButton11.Checked = false;
+        }
+        /// </Clear tout les textbox et radiobuttons de tout les onglets>
+
     }
 }
