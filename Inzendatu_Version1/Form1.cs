@@ -164,8 +164,6 @@ namespace Inzendatu_Version1
 
         private void bunifuButton2_Click(object sender, EventArgs e)
         {
-            gridPrev.Rows.Clear();
-            gridPrev.Refresh();
             //// Fix pour le focus du bunifuBouton2 "Previsualiser" -> Pressed/unpressed
             if (check_State == false)
             {
