@@ -129,5 +129,50 @@ namespace Inzendatu_Version1
                 textBox5.Text = textBetween[1];
             }
         }
+
+        public string ModificationText(string inp)
+        {
+            string ret = "";
+            if (buttonChoiceNumber == 1)
+            {
+                ret = textAjouter + inp;
+            }
+            else if (buttonChoiceNumber == 2)
+            {
+                ret = inp.Split('.')[0] + textAjouter + inp.Split('.')[1];
+            }
+            else if (buttonChoiceNumber == 3)
+            {
+                for (int i = 0; i < inp.Length; i++)
+                {
+                    if (i == (Convert.ToInt32(textPositionAdd) - 1))
+                    {
+                        ret = ret + textAjouter + inp[i];
+                    }
+                    else
+                    {
+                        ret = ret + inp[i];
+                    }
+                }
+            }
+            else if (buttonChoiceNumber == 4)
+            {
+                
+                //textBox3.Text = textBeforeOrAfter;
+            }
+            else if (buttonChoiceNumber == 5)
+            {
+                
+                //textBox3.Text = textBeforeOrAfter;
+            }
+            else if (buttonChoiceNumber == 6)
+            {
+              
+                //textBox4.Text = textBetween[0];
+                //textBox5.Text = textBetween[1];
+            }
+
+            return ret;
+        }
     }
 }

@@ -164,6 +164,8 @@ namespace Inzendatu_Version1
 
         private void bunifuButton2_Click(object sender, EventArgs e)
         {
+            gridPrev.Rows.Clear();
+            gridPrev.Refresh();
             //// Fix pour le focus du bunifuBouton2 "Previsualiser" -> Pressed/unpressed
             if (check_State == false)
             {
@@ -228,6 +230,32 @@ namespace Inzendatu_Version1
                 Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 9, 9)); //Creer manuellement les corner arrondis
                 checkPrev = false;
             }
+
+            foreach (DataGridViewRow row in bunifuDataGridView1.Rows)
+            {
+                try
+                {
+                    if (row.Cells[1].Value != null)
+                    {
+                        gridPrev.Rows.Add(Pathnow, row.Cells[1].Value.ToString(), getFromInserer(row.Cells[1].Value.ToString()));
+                    }
+                }
+                catch (Exception ee)
+                {
+
+                }
+            }
+        }
+
+        private string getFromInserer(string inp)
+        {
+            string ret = inp;
+            Console.WriteLine(ret);
+            foreach (Interface1 itm in listPropriete)
+            {
+                ret = itm.ModificationText(ret);
+            }
+            return ret;
         }
 
         private void bunifuRadioButton1_Click(object sender, EventArgs e)

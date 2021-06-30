@@ -79,5 +79,37 @@ namespace Inzendatu_Version1
                 textBox6.Text = textAfterFirstMaj;
             }
         }
+
+        public string ModificationText(string inp)
+        {
+            string ret = "";
+            if (buttonChoiceNumber == 1)
+            {
+                ret = inp.ToUpper();
+            }
+            else if (buttonChoiceNumber == 2)
+            {
+                ret = inp.ToLower();
+            }
+            else if (buttonChoiceNumber == 3)
+            {
+                ret = char.ToUpper(inp[0]) + inp.Substring(1);
+            }
+            else if (buttonChoiceNumber == 4)
+            {
+                ret = ret[0].ToString().ToUpper();
+                for (int i = 1; i < inp.Length; i++)
+                {
+                    foreach (char car in textAfterFirstMaj)
+                    {
+                        if (inp[i] == car)
+                        {
+                            ret = ret + inp[i + 1].ToString().ToUpper();
+                        }
+                    }
+                }
+            }
+            return ret;
+        }
     }
 }

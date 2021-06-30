@@ -16,5 +16,6 @@ namespace Inzendatu_Version1
         string GetTextBeforeOrAfter { get; }
         string[] GetTextBetween { get; }
         string GetTextAfterFirstMaj { get ; }
+        string ModificationText(string inp);
     }
 }
