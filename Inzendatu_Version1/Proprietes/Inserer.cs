@@ -157,13 +157,11 @@ namespace Inzendatu_Version1
             }
             else if (buttonChoiceNumber == 4)
             {
-                
-                //textBox3.Text = textBeforeOrAfter;
+                ret = inp.Insert(inp.IndexOf(textBeforeOrAfter), textAjouter);
             }
             else if (buttonChoiceNumber == 5)
             {
-                
-                //textBox3.Text = textBeforeOrAfter;
+                ret = inp.Insert(inp.IndexOf(textBeforeOrAfter) + textBeforeOrAfter.Length, textAjouter);
             }
             else if (buttonChoiceNumber == 6)
             {

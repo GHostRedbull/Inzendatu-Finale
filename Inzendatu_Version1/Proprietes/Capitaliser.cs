@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Inzendatu_Version1
 {
-    public class Capitalisation : Interface1
+    public class Capitaliser : Interface1
     {
         /// </Ne fait pas parti de la classe (mais à laisser)>
         private string textAjouter = "";
@@ -36,9 +36,9 @@ namespace Inzendatu_Version1
         public string GetTextAfterFirstMaj { get => textAfterFirstMaj; set => textAfterFirstMaj = value; }
 
 
-        public string Name { get => "Capitalisation"; }
+        public string Name { get => "Capitaliser"; }
 
-        public Capitalisation(BunifuTextBox tBox6, BunifuRadioButton rButton8, BunifuRadioButton rButton9, BunifuRadioButton rButton10, BunifuRadioButton rButton11)
+        public Capitaliser(BunifuTextBox tBox6, BunifuRadioButton rButton8, BunifuRadioButton rButton9, BunifuRadioButton rButton10, BunifuRadioButton rButton11)
         {
             textBox6 = tBox6;
             radioButton8 = rButton8;
@@ -85,29 +85,33 @@ namespace Inzendatu_Version1
             string ret = "";
             if (buttonChoiceNumber == 1)
             {
-                ret = inp.ToUpper();
+                ret = inp.Split('.')[0].ToUpper() + '.' + inp.Split('.')[1];
             }
             else if (buttonChoiceNumber == 2)
             {
-                ret = inp.ToLower();
+                ret = inp.Split('.')[0].ToLower() + '.' + inp.Split('.')[1];
             }
             else if (buttonChoiceNumber == 3)
             {
                 ret = char.ToUpper(inp[0]) + inp.Substring(1);
+
+                ret = inp.Split('.')[0].ToLower() + '.' + inp.Split('.')[1];
             }
             else if (buttonChoiceNumber == 4)
             {
-                ret = ret[0].ToString().ToUpper();
-                for (int i = 1; i < inp.Length; i++)
+                ret = char.ToUpper(inp[0]).ToString();
+                for (int i = 1; i < inp.Split('.')[0].Length; i++)
                 {
                     foreach (char car in textAfterFirstMaj)
                     {
                         if (inp[i] == car)
                         {
                             ret = ret + inp[i + 1].ToString().ToUpper();
+                            i++;
                         }
                     }
                 }
+                ret = ret + '.' + inp.Split('.')[1];
             }
             return ret;
         }

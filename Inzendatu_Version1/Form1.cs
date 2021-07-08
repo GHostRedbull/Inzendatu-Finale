@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Inzendatu_Version1.Proprietes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,7 +27,7 @@ namespace Inzendatu_Version1
             int nHeightEllipse // height of ellipse
         );
 
-
+        private Descriptions desc = new Descriptions();
         private List<string> listFilesSelected = new List<string>();
         private bool checkPrev = false;
         private string Pathnow = "";
@@ -54,7 +55,7 @@ namespace Inzendatu_Version1
             gridPrev.Columns.Add("NO", "Nom Original");
             gridPrev.Columns.Add("NN", "Nouveau Nom");
 
-            initLabelVide();
+            desc.initLabelVide();
 
             listView1.MultiSelect = true;
             listView1.View = View.List;
@@ -91,55 +92,42 @@ namespace Inzendatu_Version1
 
         private void bunifuDataGridView1_SelectionChanged(object sender, EventArgs e)
         {
+            desc.Top = this.Top + 57;
+            desc.Left = this.Right + 10;
+
             /// Clean la description 
             bool check = false;
+
+            /// Chope la selection "Vide"
             try { if (bunifuDataGridView1.CurrentRow.Cells[0].Value.ToString() != string.Empty) { } }
             catch (Exception ee)
             {
                 if (ee.ToString().Contains("System.NullReferenceException: La référence d'objet n'est pas définie à une instance d'un objet."))
                 {
                     check = true;
-                    initLabelVide();
+                    desc.initLabelVide();
+                    desc.Hide();
                 }
             }
 
+            /// Chope la selection "Pleine"
             if (bunifuDataGridView1.SelectedRows.Count == 1 && ouvertoupas == true && bunifuDataGridView1.RowCount > 1 && check == false)
             {
                 try
                 {
                     string activePath = getEmplacement(bunifuDataGridView1.SelectedRows[0].Index);
                     FileInfo fileInfo = new FileInfo(activePath);
-                    initLabelRempli(fileInfo, activePath);
+                    desc.initLabelRempli(fileInfo, activePath);
+                    desc.Show();
                 }
                 catch (Exception ee)
                 {
                     //Console.WriteLine(ee.ToString());
-                    pictureBox1.Image = null;
-                    pictureBox1.Refresh();
+                    desc.pictureInit();
                 }
             }
 
             bunifuVScrollBar1.Maximum = bunifuDataGridView1.RowCount + 5;
-        }
-
-        private string getDimensions(string path)
-        {
-            string ret = "";
-            try
-            {
-                Image img = Image.FromFile(path);
-                ret = img.Width + " x " + img.Height;     
-                pictureBox1.Image = img;
-                pictureBox1.Refresh();
-            }
-            catch (Exception e)
-            {
-                pictureBox1.Image = null;
-                pictureBox1.Refresh();
-                //Console.WriteLine(e.ToString());
-            }
-
-            return ret;
         }
 
         private string getEmplacement(int selectedRow_inDataGridViewCentrale)
@@ -149,14 +137,21 @@ namespace Inzendatu_Version1
 
         private void bunifuButton1_Click(object sender, EventArgs e)
         {
+
             List<string> listtt = new List<string>();
             int i = 0;
+            if (bunifuDataGridView1.Rows.Count > 1)
+            {
+                i = bunifuDataGridView1.Rows.Count - 1;
+            }
 
             foreach (var tt in listView1.SelectedItems)
             {
                 listtt.Add(tt.ToString().Split('{')[1].Split('}')[0]);
-
                 bunifuDataGridView1.Rows.Add(++i, tt.ToString().Split('{')[1].Split('}')[0]);
+
+                desc.Top = this.Top + 57;
+                desc.Left = this.Right + 10;
             }
 
             bunifuVScrollBar1.Maximum = bunifuDataGridView1.RowCount + 5;
@@ -180,7 +175,7 @@ namespace Inzendatu_Version1
             
             if (checkPrev == false)
             {
-                panelPrev.Size = new Size(1320, 250);
+                panelPrev.Size = new Size(1010, 250);
                 panelPrev.Dock = DockStyle.Bottom;
                 panelPrev.Padding = new Padding(12, 0, 12, 12);
                 panelPrev.Controls.Add(gridPrev);
@@ -215,33 +210,39 @@ namespace Inzendatu_Version1
                 gridPrev.CurrentTheme.RowsStyle.SelectionForeColor = Color.FromArgb(57, 47, 90);
                 gridPrev.HeaderBackColor = Color.FromArgb(57, 47, 90);
                 gridPrev.HeaderForeColor = Color.White;
-
-                this.Size = new Size(1320, 1050);
+                gridPrev.Enabled = true;
+                this.Size = new Size(1010, 1050);
                 Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 9, 9)); //Creer manuellement les corner arrondis
                 this.Controls.Add(panelPrev);
                 checkPrev = true;
             }
             else
             {
-                this.Size = new Size(1320, 800);
+                this.Size = new Size(1010, 800);
                 this.Controls.Remove(panelPrev);
                 Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 9, 9)); //Creer manuellement les corner arrondis
                 checkPrev = false;
             }
 
-            foreach (DataGridViewRow row in bunifuDataGridView1.Rows)
+            PrevisualisationRefresh();
+        }
+
+        private void PrevisualisationRefresh()
+        {
+            try
             {
-                try
+                gridPrev.DataSource = null;
+                gridPrev.Rows.Clear();
+
+                foreach (DataGridViewRow row in bunifuDataGridView1.Rows)
                 {
                     if (row.Cells[1].Value != null)
-                    {
                         gridPrev.Rows.Add(Pathnow, row.Cells[1].Value.ToString(), getFromInserer(row.Cells[1].Value.ToString()));
-                    }
                 }
-                catch (Exception ee)
-                {
+            }
+            catch (Exception ee)
+            {
 
-                }
             }
         }
 
@@ -272,64 +273,23 @@ namespace Inzendatu_Version1
             }
         }
 
+        private void bunifuDataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            PrevisualisationRefresh();
+        }
+
         private void bunifuDataGridView1_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             if (bunifuDataGridView1.Rows.Count == 1)
             {
-                initLabelVide();
+                desc.initLabelVide();
             }
             bunifuVScrollBar1.Maximum = bunifuDataGridView1.RowCount + 5;
+
+            PrevisualisationRefresh();
         }
 
-        private void initLabelVide()
-        {
-            bunifuLabel1.Text = "";// Nom (Titre)
-            bunifuLabel2.Text = ""; // Emplacement (Titre)
-            bunifuLabel3.Text = ""; // Type (Titre)
-            bunifuLabel4.Text = ""; // Taille (Titre)
-            bunifuLabel5.Text = ""; // Dimensions (Titre)
-            bunifuLabel6.Text = ""; // D.Creation (Titre)
-            bunifuLabel7.Text = ""; // D.Modifi (Titre)
-            bunifuLabel8.Text = "";// Nom
-            bunifuLabel9.Text = ""; // Emplacement
-            bunifuLabel10.Text = ""; // Type
-            bunifuLabel11.Text = ""; // Taille
-            bunifuLabel12.Text = ""; // Dimensions
-            bunifuLabel13.Text = ""; // D.Creation
-            bunifuLabel14.Text = ""; // D.Modifi
-            pictureBox1.Image = null;
-            pictureBox3.Image = null;
-        }
-
-        private void initLabelRempli(FileInfo fi, string path_)
-        {
-            bunifuLabel1.Text = "Nom";// Nom (Titre)
-            bunifuLabel2.Text = "Emplacement"; // Emplacement (Titre)
-            bunifuLabel3.Text = "Type"; // Type (Titre)
-            bunifuLabel4.Text = "Taille"; // Taille (Titre)
-            bunifuLabel5.Text = "Dimensions"; // Dimensions (Titre)
-            bunifuLabel6.Text = "Creation"; // D.Creation (Titre)
-            bunifuLabel7.Text = "Modifications"; // D.Modifi (Titre)
-            bunifuLabel8.Text = fi.Name; // Nom
-            bunifuLabel9.Text = fi.Directory.ToString(); // Emplacement
-            bunifuLabel10.Text = fi.Extension; // Type
-            bunifuLabel11.Text = fi.Length.ToString(); // Taille
-            if (fi.Length >= (1 << 30))
-                bunifuLabel11.Text = string.Format("{0} Go", fi.Length >> 30);
-            else
-                    if (fi.Length >= (1 << 20))
-                bunifuLabel11.Text = string.Format("{0} Mo", fi.Length >> 20);
-            else
-                    if (fi.Length >= (1 << 10))
-                bunifuLabel11.Text = string.Format("{0} Ko", fi.Length >> 10);
-            else
-                bunifuLabel11.Text = string.Format("{0} Octets", fi.Length >> 10);
-            bunifuLabel12.Text = getDimensions(path_); // Dimensions
-            bunifuLabel13.Text = fi.CreationTime.ToString(); // D.Creation
-            bunifuLabel14.Text = fi.LastWriteTime.ToString(); // D.Modifi
-            pictureBox3.Image = Icon.ExtractAssociatedIcon(path_).ToBitmap();
-        }
-
+        ///// Tout les boutons du menu "Propiete"
         private void bunifuButton5_Click(object sender, EventArgs e)
         {
             bunifuPages1.SetPage(0);
@@ -365,6 +325,9 @@ namespace Inzendatu_Version1
                     break;
             }
         }
+        ///// Tout les boutons du menu "Propiete"
+
+
 
         ////// Tout les boutons "ajouter" à l'interieur des tabPages
         private void bunifuButton8_Click(object sender, EventArgs e)
@@ -373,23 +336,31 @@ namespace Inzendatu_Version1
             listPropriete.Add(ins);     
             listView2.Items.Add((listPropriete.Count).ToString() + ". " + listPropriete.Last().Name);
             listView2.Refresh();
-
             ClearAll();
+            PrevisualisationRefresh();
         }
 
         private void bunifuButton9_Click(object sender, EventArgs e)
         {
-
+            Numéroter num = new Numéroter(bunifuTextBox7, bunifuTextBox8, bunifuRadioButton12, bunifuRadioButton13, bunifuRadioButton14, bunifuRadioButton15, bunifuRadioButton16);
+            listPropriete.Add(num);
+            listView2.Items.Add((listPropriete.Count).ToString() + ". " + listPropriete.Last().Name);
+            listView2.Refresh();
+            ClearAll();
+            PrevisualisationRefresh();
         }
 
         private void bunifuButton10_Click(object sender, EventArgs e)
         {
-            Capitalisation capi = new Capitalisation(bunifuTextBox6, bunifuRadioButton8, bunifuRadioButton9, bunifuRadioButton10, bunifuRadioButton11);
+            Capitaliser capi = new Capitaliser(bunifuTextBox6, bunifuRadioButton8, bunifuRadioButton9, bunifuRadioButton10, bunifuRadioButton11);
             listPropriete.Add(capi);
             listView2.Items.Add((listPropriete.Count).ToString() + ". " + listPropriete.Last().Name);
             listView2.Refresh();
+            ClearAll();
+            PrevisualisationRefresh();
         }
         ////// Tout les boutons "ajouter" à l'interieur des tabPages
+   
 
         private void listView2_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -409,7 +380,15 @@ namespace Inzendatu_Version1
 
                     Console.WriteLine("Ici Inser " + listPropriete[p].GetTextAjouter);
                 }
-                else if (selectedItems[0].ToString().Contains("Capitalisation"))
+                else if (selectedItems[0].ToString().Contains("Numéroter"))
+                {
+                    //// Ici si un l'item selectionné est de type Capitalisation
+                    bunifuPages1.SelectedIndex = 1;
+                    listPropriete[p].Send();
+
+                    Console.WriteLine("Ici Numéroter");
+                }
+                else if (selectedItems[0].ToString().Contains("Capitaliser"))
                 {
                     //// Ici si un l'item selectionné est de type Capitalisation
                     bunifuPages1.SelectedIndex = 2;
@@ -455,6 +434,60 @@ namespace Inzendatu_Version1
             bunifuRadioButton11.Checked = false;
         }
         /// </Clear tout les textbox et radiobuttons de tout les onglets>
+        
 
+        /// Haut
+        private void bunifuTileButton1_Click(object sender, EventArgs e)
+        {
+            if (bunifuDataGridView1.SelectedRows[0].Index != 0)
+            {
+                for (int j = 1; j < this.bunifuDataGridView1.Columns.Count; j++)
+                {
+                    object tmp = this.bunifuDataGridView1[j, bunifuDataGridView1.SelectedRows[0].Index].Value;
+                    this.bunifuDataGridView1[j, bunifuDataGridView1.SelectedRows[0].Index].Value = this.bunifuDataGridView1[j, bunifuDataGridView1.SelectedRows[0].Index - 1].Value;
+                    this.bunifuDataGridView1[j, bunifuDataGridView1.SelectedRows[0].Index - 1].Value = tmp;
+                }
+                int a = bunifuDataGridView1.SelectedRows[0].Index;
+                bunifuDataGridView1.ClearSelection();
+                this.bunifuDataGridView1.Rows[a - 1].Selected = true;
+            }
+
+            PrevisualisationRefresh();
+        }
+        /// Bas
+        private void bunifuTileButton2_Click(object sender, EventArgs e)
+        {
+            if (bunifuDataGridView1.SelectedRows[0].Index != bunifuDataGridView1.Rows.Count - 2)
+            {
+                for (int j = 1; j < this.bunifuDataGridView1.Columns.Count; j++)
+                {
+                    object tmp = this.bunifuDataGridView1[j, bunifuDataGridView1.SelectedRows[0].Index].Value;
+                    this.bunifuDataGridView1[j, bunifuDataGridView1.SelectedRows[0].Index].Value = this.bunifuDataGridView1[j, bunifuDataGridView1.SelectedRows[0].Index + 1].Value;
+                    this.bunifuDataGridView1[j, bunifuDataGridView1.SelectedRows[0].Index + 1].Value = tmp;
+                }
+                int i = bunifuDataGridView1.SelectedRows[0].Index;
+                bunifuDataGridView1.ClearSelection();
+                this.bunifuDataGridView1.Rows[i + 1].Selected = true;
+            }
+
+            PrevisualisationRefresh();
+        }
+
+        private void bunifuTileButton4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuFormDock1_FormDragging(object sender, Bunifu.UI.WinForms.BunifuFormDock.FormDraggingEventArgs e)
+        {
+            desc.Top = this.Top + 57;
+            desc.Left = this.Right + 10;
+        }
+
+        private void Form1_LocationChanged(object sender, EventArgs e)
+        {
+            desc.Top = this.Top + 57;
+            desc.Left = this.Right + 10;
+        }
     }
 }
