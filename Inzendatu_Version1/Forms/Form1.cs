@@ -1,4 +1,5 @@
-﻿using Inzendatu_Version1.Proprietes;
+﻿using Bunifu.UI.WinForms.BunifuAnimatorNS;
+using Inzendatu_Version1.Proprietes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

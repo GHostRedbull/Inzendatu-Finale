@@ -83,7 +83,11 @@ namespace Inzendatu_Version1
         public string ModificationText(string inp)
         {
             string ret = "";
-            if (buttonChoiceNumber == 1)
+            if (buttonChoiceNumber == 0)
+            {
+                ret = inp;
+            }
+            else if (buttonChoiceNumber == 1)
             {
                 ret = inp.Split('.')[0].ToUpper() + '.' + inp.Split('.')[1];
             }
@@ -94,8 +98,7 @@ namespace Inzendatu_Version1
             else if (buttonChoiceNumber == 3)
             {
                 ret = char.ToUpper(inp[0]) + inp.Substring(1);
-
-                ret = inp.Split('.')[0].ToLower() + '.' + inp.Split('.')[1];
+                ret = ret.Split('.')[0] + '.' + ret.Split('.')[1];
             }
             else if (buttonChoiceNumber == 4)
             {
