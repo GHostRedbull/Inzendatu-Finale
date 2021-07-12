@@ -176,7 +176,7 @@ namespace Inzendatu_Version1
             
             if (checkPrev == false)
             {
-                panelPrev.Size = new Size(1010, 250);
+                panelPrev.Size = new Size(1010, 225);
                 panelPrev.Dock = DockStyle.Bottom;
                 panelPrev.Padding = new Padding(12, 0, 12, 12);
                 panelPrev.Controls.Add(gridPrev);
@@ -212,14 +212,14 @@ namespace Inzendatu_Version1
                 gridPrev.HeaderBackColor = Color.FromArgb(57, 47, 90);
                 gridPrev.HeaderForeColor = Color.White;
                 gridPrev.Enabled = true;
-                this.Size = new Size(1010, 1050);
+                this.Size = new Size(1010, 955);
                 Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 9, 9)); //Creer manuellement les corner arrondis
                 this.Controls.Add(panelPrev);
                 checkPrev = true;
             }
             else
             {
-                this.Size = new Size(1010, 800);
+                this.Size = new Size(1010, 730);
                 this.Controls.Remove(panelPrev);
                 Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 9, 9)); //Creer manuellement les corner arrondis
                 checkPrev = false;
