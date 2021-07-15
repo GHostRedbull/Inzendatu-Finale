@@ -218,7 +218,6 @@ C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Versio
 C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Version1\bin\Debug\Bunifu.UI.WinForms.BunifuTransition.xml
 C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Version1\bin\Debug\Bunifu.UI.WinForms.BunifuUserControl.xml
 C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Version1\obj\Debug\Inzendatu_Version1.csprojAssemblyReference.cache
-C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Version1\obj\Debug\Inzendatu_Version1.Form1.resources
 C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Version1\obj\Debug\Inzendatu_Version1.Properties.Resources.resources
 C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Version1\obj\Debug\Inzendatu_Version1.csproj.GenerateResource.cache
 C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Version1\obj\Debug\Inzendatu_Version1.exe.licenses
@@ -228,3 +227,4 @@ C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Versio
 C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Version1\obj\Debug\Inzendatu_Version1.pdb
 C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Version1\obj\Debug\Inzendatu_Version1.Descriptions.resources
 C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Version1\obj\Debug\Inzendatu_Version1.ScreenSplash.resources
+C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Version1\obj\Debug\Inzendatu_Version1.Inzendatu.resources

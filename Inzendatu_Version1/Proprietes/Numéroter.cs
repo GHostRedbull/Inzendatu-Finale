@@ -19,11 +19,14 @@ namespace Inzendatu_Version1.Proprietes
         private string textBeforeOrAfter = "";
         public string GetTextBeforeOrAfter { get => textBeforeOrAfter; set => textBeforeOrAfter = value; }
 
-        private string[] textBetween = { "", "" };
-        public string[] GetTextBetween { get => textBetween; set => textBetween = value; }
-
         private string textAfterFirstMaj = "";
         public string GetTextAfterFirstMaj { get => textAfterFirstMaj; set => textAfterFirstMaj = value; }
+
+        private int txtDe = 0;
+        public int GetDe { get => txtDe; set => txtDe = value; }
+
+        private int txtA = 0;
+        public int GetA { get => txtA; set => txtA = value; }
         /// </Ne fait pas parti de la classe (mais à laisser)>
 
         private int buttonChoiceNumber = 0;
@@ -38,8 +41,9 @@ namespace Inzendatu_Version1.Proprietes
         BunifuRadioButton radioButton3;
         BunifuRadioButton radioButton4;
         BunifuRadioButton radioButton5;
+        BunifuDataGridView gridView;
 
-        public Numéroter(BunifuTextBox tBox1, BunifuTextBox tBox2, BunifuRadioButton rButton1, BunifuRadioButton rButton2, BunifuRadioButton rButton3, BunifuRadioButton rButton4, BunifuRadioButton rButton5)
+        public Numéroter(BunifuTextBox tBox1, BunifuTextBox tBox2, BunifuRadioButton rButton1, BunifuRadioButton rButton2, BunifuRadioButton rButton3, BunifuRadioButton rButton4, BunifuRadioButton rButton5, BunifuDataGridView grid)
         {
             textBox1 = tBox1;
             textBox2 = tBox2;
@@ -48,6 +52,7 @@ namespace Inzendatu_Version1.Proprietes
             radioButton3 = rButton3;
             radioButton4 = rButton4;
             radioButton5 = rButton5;
+            gridView = grid;
 
             if (rButton1.Checked == true)
                 buttonChoiceNumber = 1;
@@ -68,7 +73,6 @@ namespace Inzendatu_Version1.Proprietes
                 buttonChoiceNumber = 5;
                 textBeforeOrAfter = textBox2.Text;
             }
-
         }
 
         public void Send()
@@ -108,14 +112,23 @@ namespace Inzendatu_Version1.Proprietes
 
         public string ModificationText(string inp)
         {
+            return inp;
+        }
+
+        public string ModificationTextNuméro(string inp, int index, int count)
+        {
             string ret = "";
+            if (buttonChoiceNumber == 0)
+            {
+                ret = inp;
+            }
             if (buttonChoiceNumber == 1)
             {
-                //ret = textAjouter + inp;
+                ret = (index + 1).ToString().PadLeft((count-1).ToString().Length, '0') + inp;
             }
             else if (buttonChoiceNumber == 2)
             {
-                //ret = inp.Split('.')[0] + textAjouter + inp.Split('.')[1];
+                ret = inp.Split('.')[0] + (index + 1).ToString().PadLeft((count-1).ToString().Length, '0') + "." + inp.Split('.')[1];
             }
             else if (buttonChoiceNumber == 3)
             {
@@ -134,11 +147,26 @@ namespace Inzendatu_Version1.Proprietes
             }
             else if (buttonChoiceNumber == 4)
             {
-                //ret = inp.Insert(inp.IndexOf(textBeforeOrAfter), textAjouter);
+                if (inp.IndexOf(textBeforeOrAfter) != -1)
+                {
+                    ret = inp.Insert(inp.IndexOf(textBeforeOrAfter), (index + 1).ToString().PadLeft((count - 1).ToString().Length, '0'));
+                }
+                else
+                {
+                    ret = inp;
+                }
+
             }
             else if (buttonChoiceNumber == 5)
             {
-                //ret = inp.Insert(inp.IndexOf(textBeforeOrAfter) + textBeforeOrAfter.Length, textAjouter);
+                if (inp.IndexOf(textBeforeOrAfter) != -1)
+                {
+                    ret = inp.Insert(inp.IndexOf(textBeforeOrAfter) + textBeforeOrAfter.Length, (index + 1).ToString().PadLeft((count-1).ToString().Length, '0'));
+                }
+                else
+                {
+                    ret = inp;
+                }
             }
 
             return ret;

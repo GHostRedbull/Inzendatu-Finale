@@ -19,8 +19,11 @@ namespace Inzendatu_Version1
         private string textBeforeOrAfter = "";
         public string GetTextBeforeOrAfter { get => textBeforeOrAfter; set => textBeforeOrAfter = value; }
 
-        private string[] textBetween = { "", "" };
-        public string[] GetTextBetween { get => textBetween; set => textBetween = value; }
+        private int txtDe = 0;
+        public int GetDe { get => txtDe; set => txtDe = value; }
+
+        private int txtA = 0;
+        public int GetA { get => txtA; set => txtA = value; }
         /// </Ne fait pas parti de la classe (mais à laisser)>
 
         BunifuTextBox textBox6;
@@ -109,14 +112,23 @@ namespace Inzendatu_Version1
                     {
                         if (inp[i] == car)
                         {
-                            ret = ret + inp[i + 1].ToString().ToUpper();
+                            ret = ret + inp[i] + inp[i+1].ToString().ToUpper();
                             i++;
+                        }
+                        else
+                        {
+                            ret = ret + inp[i];
                         }
                     }
                 }
                 ret = ret + '.' + inp.Split('.')[1];
             }
             return ret;
+        }
+
+        public string ModificationTextNuméro(string inp, int index, int count)
+        {
+            throw new NotImplementedException();
         }
     }
 }

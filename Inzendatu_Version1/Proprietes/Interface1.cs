@@ -14,8 +14,10 @@ namespace Inzendatu_Version1
         int GetButtonChoiceNumber { get; }
         string GetTextPositionAdd { get; }
         string GetTextBeforeOrAfter { get; }
-        string[] GetTextBetween { get; }
         string GetTextAfterFirstMaj { get ; }
+        int GetDe { get; }
+        int GetA { get; }
         string ModificationText(string inp);
+        string ModificationTextNuméro(string inp, int index, int count);
     }
 }

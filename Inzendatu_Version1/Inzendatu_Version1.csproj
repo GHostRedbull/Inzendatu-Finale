@@ -34,6 +34,28 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Inzendatu|AnyCPU'">
+    <OutputPath>bin\Inzendatu\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Inzendatu|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Inzendatu\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bunifu.Licensing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f89b4760ba7dcb6b, processorArchitecture=MSIL">
       <HintPath>..\packages\Bunifu.UI.WinForms.5.0.3\lib\Bunifu.Licensing.dll</HintPath>
@@ -153,13 +175,14 @@
     <Compile Include="Forms\Descriptions.Designer.cs">
       <DependentUpon>Descriptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Proprietes\Supprimer.cs" />
     <Compile Include="Proprietes\Capitaliser.cs" />
     <Compile Include="Proprietes\Inserer.cs" />
-    <Compile Include="Forms\Form1.cs">
+    <Compile Include="Forms\Inzendatu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\Inzendatu.Designer.cs">
+      <DependentUpon>Inzendatu.cs</DependentUpon>
     </Compile>
     <Compile Include="Proprietes\Interface1.cs" />
     <Compile Include="Program.cs" />
@@ -174,8 +197,8 @@
     <EmbeddedResource Include="Forms\Descriptions.resx">
       <DependentUpon>Descriptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Inzendatu.resx">
+      <DependentUpon>Inzendatu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -190,6 +213,7 @@
     <EmbeddedResource Include="Forms\ScreenSplash.resx">
       <DependentUpon>ScreenSplash.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
