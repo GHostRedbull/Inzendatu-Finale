@@ -78,25 +78,17 @@ namespace Inzendatu_Version1
         {
             string ret = "";
             try
-            {     
-                if (bunifuLabel3.Text.Contains("NEF"))
-                {
-                   
-                }
-                else
-                {
-                    Image img = Image.FromFile(path);
-                    ret = img.Width + " x " + img.Height;
-                    pictureBox1.Image = img;
-                    pictureBox1.Refresh();
-                    this.Size = new Size(284, 477);
-                }
+            {
+                Image img = Image.FromFile(path);
+                ret = img.Width + " x " + img.Height;
+                pictureBox1.Image = img;
+                pictureBox1.Refresh();
+                this.Size = new Size(284, 477);
             }
             catch (Exception e)
             {
                 pictureBox1.Image = null;
                 pictureBox1.Refresh();
-                //Console.WriteLine(e.ToString());
                 this.Size = new Size(284, 250);
             }
 
