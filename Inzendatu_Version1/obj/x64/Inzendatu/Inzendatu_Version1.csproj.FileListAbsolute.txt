@@ -73,3 +73,4 @@ C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Versio
 C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Version1\obj\x64\Inzendatu\Inzendatu_Version1.csproj.CoreCompileInputs.cache
 C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Version1\obj\x64\Inzendatu\Inzendatu_Version1.csproj.CopyComplete
 C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Version1\obj\x64\Inzendatu\Inzendatu_Version1.exe
+C:\Users\JHILAL\Documents\Git Projet Inzendatu\Inzendatu-Finale\Inzendatu_Version1\obj\x64\Inzendatu\Inzendatu_Version1.csprojAssemblyReference.cache

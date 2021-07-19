@@ -26,6 +26,7 @@ namespace Inzendatu_Version1
         BunifuRadioButton radioButton17;
         BunifuRadioButton radioButton18;
         BunifuRadioButton radioButton19;
+        BunifuRadioButton radioButton20;
 
         private int buttonChoiceNumber = 0;
         public int GetButtonChoiceNumber { get => buttonChoiceNumber; set => buttonChoiceNumber = value; }
@@ -41,7 +42,7 @@ namespace Inzendatu_Version1
 
         public string Name { get => "Supprimer"; }
 
-        public Supprimer(BunifuTextBox tBox9, BunifuTextBox tBox10, BunifuTextBox tBox11, BunifuRadioButton rButton17, BunifuRadioButton rButton18, BunifuRadioButton rButton19)
+        public Supprimer(BunifuTextBox tBox9, BunifuTextBox tBox10, BunifuTextBox tBox11, BunifuRadioButton rButton17, BunifuRadioButton rButton18, BunifuRadioButton rButton19, BunifuRadioButton rButton20)
         {
             textBox9 = tBox9;
             textBox10 = tBox10;
@@ -49,6 +50,7 @@ namespace Inzendatu_Version1
             radioButton17 = rButton17;
             radioButton18 = rButton18;
             radioButton19 = rButton19;
+            radioButton20 = rButton20;
 
             if (rButton17.Checked == true)
             {
@@ -75,6 +77,13 @@ namespace Inzendatu_Version1
                 textBox10.Enabled = true;
                 textBox11.Enabled = true;
             }
+            else if (rButton20.Checked == true)
+            {
+                buttonChoiceNumber = 4;
+                textBox9.Enabled = false;
+                textBox10.Enabled = false;
+                textBox11.Enabled = false;
+            }
         }
 
         public void Send()
@@ -85,6 +94,7 @@ namespace Inzendatu_Version1
             radioButton17.Checked = false;
             radioButton18.Checked = false;
             radioButton19.Checked = false;
+            radioButton20.Checked = false;
 
             if (buttonChoiceNumber == 1)
             {
@@ -110,6 +120,13 @@ namespace Inzendatu_Version1
                 textBox9.Enabled = false;
                 textBox10.Enabled = true;
                 textBox11.Enabled = true;
+            }
+            else if (buttonChoiceNumber == 4)
+            {
+                radioButton20.Checked = true;
+                textBox9.Enabled = false;
+                textBox10.Enabled = false;
+                textBox11.Enabled = false;
             }
         }
 
@@ -144,7 +161,11 @@ namespace Inzendatu_Version1
             }
             else if (buttonChoiceNumber == 3)
             {
-                ret =  inp.Split('.')[0].Remove(txtDe-1, txtA - txtDe) + '.' + inp.Split('.')[1];
+                ret = inp.Split('.')[0].Remove(txtDe - 1, txtA - txtDe) + '.' + inp.Split('.')[1];
+            }
+            else if (buttonChoiceNumber == 4)
+            {
+                ret = "." + inp.Split('.')[1];
             }
 
             return ret;

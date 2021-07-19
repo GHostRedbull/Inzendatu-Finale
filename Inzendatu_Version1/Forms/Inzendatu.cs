@@ -100,6 +100,7 @@ namespace Inzendatu_Version1
             bunifuRadioButton17.Checked = true;
             bunifuRadioButton18.Checked = false;
             bunifuRadioButton19.Checked = false;
+            bunifuRadioButton7.Checked = false;
         }
 
         #region Tout les boutons de la "card Upload"
@@ -424,7 +425,7 @@ namespace Inzendatu_Version1
 
         private void bunifuButton17_Click(object sender, EventArgs e)
         {
-            Supprimer supp = new Supprimer(bunifuTextBox9, bunifuTextBox10, bunifuTextBox11, bunifuRadioButton17, bunifuRadioButton18, bunifuRadioButton19);
+            Supprimer supp = new Supprimer(bunifuTextBox9, bunifuTextBox10, bunifuTextBox11, bunifuRadioButton17, bunifuRadioButton18, bunifuRadioButton19, bunifuRadioButton7);
             listPropriete.Add(supp);
             listView2.Items.Add((listPropriete.Count).ToString() + ". " + listPropriete.Last().Name);
             listView2.Refresh();
@@ -469,7 +470,7 @@ namespace Inzendatu_Version1
             if (listView2.SelectedItems.Count > 0)
             {
                 int p = listView2.SelectedIndices[0];
-                listPropriete[p] = new Supprimer(bunifuTextBox9, bunifuTextBox10, bunifuTextBox11, bunifuRadioButton17, bunifuRadioButton18, bunifuRadioButton19);
+                listPropriete[p] = new Supprimer(bunifuTextBox9, bunifuTextBox10, bunifuTextBox11, bunifuRadioButton17, bunifuRadioButton18, bunifuRadioButton19, bunifuRadioButton7);
             }
             PrevisualisationRefresh();
         }
@@ -578,6 +579,16 @@ namespace Inzendatu_Version1
                 case DialogResult.No:
                     break;
             }
+        }
+
+        private void bunifuTileButton8_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void bunifuTileButton9_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
         #endregion
 
@@ -689,6 +700,7 @@ namespace Inzendatu_Version1
             bunifuRadioButton17.Checked = true;
             bunifuRadioButton18.Checked = false;
             bunifuRadioButton19.Checked = false;
+            bunifuRadioButton7.Checked = false;
         }
 
         private string getEmplacement(int selectedRow_inDataGridViewCentrale)
@@ -1001,6 +1013,5 @@ namespace Inzendatu_Version1
                 bunifuTextBox6.Enabled = true;
         }
         #endregion
-
     }
 }
